@@ -1,0 +1,41 @@
+.container-testinomial{
+
+    display: flex;
+    flex-direction: column;
+
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+ 
+  }
+  
+.card3 {
+    border: none;
+    padding: 20px;
+ 
+}
+
+.card3 img{
+    padding-left: 20px;
+    padding-bottom: 30px;
+}
+.rev2 i{
+    color: #e9a426;
+   }
+
+.card3 h3{
+     color: #075999;
+     font-size: 30px;
+   }
+.col-lg-12 h1{
+  padding-left: 560px;
+  padding-top: 50px;
+}
+.testi{
+  background-color:#76b3e2;
+  height: 150px;
+ 
+}
