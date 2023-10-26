@@ -1,13 +1,10 @@
 /* ContactUs.css */
-  .row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
   .col-lg-6 {
     width: 48%;
   }
-  
+  .container123 h1{
+    color: #f8f5f5;
+  }
   h2 {
     font-size: 24px;
     font-weight: bold;
@@ -43,16 +40,16 @@
    height: 50px;
 
   }
-  
-.row {
-    padding-top: 40px;
-}
-
-.testi{
-  background-color:#76b3e2;
+.test4{
+  background-color:#075999;
   height: 150px;
 }
-.testi h1{
-  padding-left: 560px;
+.test4 h1{
+text-align: center;
   padding-top: 50px;
+  color: #fff;
+}
+
+.contact-padding{
+  padding: 20px;
 }

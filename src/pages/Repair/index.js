@@ -6,7 +6,7 @@ function Repair() {
   return (
  
       <div className='repair-service'>
-           <div className='testi'>
+           <div className='test2'>
        <h1><b>Repair Service</b></h1></div>
       <h2>Lorem Ipsum</h2>
       <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto.</p>

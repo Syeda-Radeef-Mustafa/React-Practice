@@ -7,7 +7,7 @@ import './index.css';
 function Testinomial() {
   return ( 
     <div class="col-lg-12">
-      <div className='testi'>
+      <div className='test1'>
        <h1><b>Testinomial</b></h1></div>
   <div class="row">
   <div className='col-lg-4'>

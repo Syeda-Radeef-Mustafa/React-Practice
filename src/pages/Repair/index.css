@@ -1,12 +1,12 @@
 .repair-service{
-    padding-left: 50px;
-    padding-top: 50px;
+    padding-top: 5px;
 }
-.testi{
-    background-color:#76b3e2;
+.test2{
+    background-color:#075999;
     height: 150px;
   }
-  .testi h1{
-    padding-left: 560px;
+  .test2 h1{
+    text-align: center;
     padding-top: 50px;
+    color: rgb(246, 250, 253);
   }
