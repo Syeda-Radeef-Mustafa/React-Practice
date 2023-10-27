@@ -4,10 +4,11 @@ import Header from './component/header';
 import Footer from './component/footer';
 import Home from './pages/Home';
 import AboutUs from './pages/About';
-import ContactUs from './pages/Contact';
+import ContactUs from './pages/ContactUs';
 import Testinomial from './pages/Testinomial';
 import Repair from './pages/Repair';
 import Salesproduct from './pages/Salesproduct';
+import Calculator from './component/calculator';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/testinomial" element={<Testinomial/>} />
         <Route path="/repair" element={<Repair/>} />
         <Route path="/salesproduct" element={<Salesproduct/>} />
+        <Route path="/calculator" element={<Calculator/>} />
         </Routes>
       </Router>
       <Footer />
