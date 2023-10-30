@@ -13,14 +13,14 @@
     padding: 10px;
   }
   
-  .buttons {
+  .button-cal {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     margin-top: 10px;
   }
   
-  button {
+ .button-cal {
     background: #2196F3;
     color: #fff;
     font-size: 20px;

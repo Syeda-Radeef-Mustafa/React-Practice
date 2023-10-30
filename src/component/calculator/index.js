@@ -44,7 +44,7 @@ class Calculator extends Component {
     return (
       <div className="calculator">
         <div className="display">{this.state.display}</div>
-        <div className="buttons">
+        <div className="button-cal">
           <button onClick={() => this.handleButtonPress('7')}>7</button>
           <button onClick={() => this.handleButtonPress('8')}>8</button>
           <button onClick={() => this.handleButtonPress('9')}>9</button>
