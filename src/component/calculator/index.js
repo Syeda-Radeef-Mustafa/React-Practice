@@ -1,70 +1,124 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import './index.css';
 
-class Calculator extends Component {
-  constructor() {
-    super();
-    this.state = {
-      display: '0',
-    };
-  }
+function Calculator() {
+  const [input, setInput] = useState('');
 
-  handleButtonPress = (value) => {
-    if (this.state.display === '0') {
-      this.setState({
-        display: value,
-      });
+  const addToInput = (value) => {
+    setInput(input + value);
+  };
+
+  const clearInput = () => {
+    setInput('');
+  };
+
+  const calculateResult = () => {
+    let inputCopy = input;
+    let currentNumber = '';
+    let currentOperator = '+';
+    let total = 0;
+    let index = 0;
+
+    while (index < inputCopy.length) {
+      const char = inputCopy[index];
+
+      if (/[0-9.]/.test(char) || (char === '-' | char ==='+' && currentNumber === '')) {
+        currentNumber += char;
+      } else if (/[+\-*/.]/.test(char)) {
+        if (currentNumber !== '') {
+          const number = parseFloat(currentNumber);
+
+          switch (currentOperator) {
+            case '+':
+              total += number;
+              break;
+            case '-':
+              total -= number;
+              break;
+            case '*':
+              total *= number;
+              break;
+            case '/':
+              if (number !== 0) {
+                total /= number;
+              } else {
+                setInput('Error: Division by zero');
+                return;
+              }
+              break;
+            default:
+              break;
+          }
+        } else {
+          setInput('Error: Invalid Character');
+          return;
+        }
+        currentNumber = '';
+        currentOperator = char;
+      } else {
+        setInput('Error: Invalid character');
+        return;
+      }
+
+      index++;
+    }
+
+    if (currentNumber !== '') {
+      const number = parseFloat(currentNumber);
+
+      switch (currentOperator) {
+        case '+':
+          total += number;
+          break;
+        case '-':
+          total -= number;
+          break;
+        case '*':
+          total *= number;
+          break;
+        case '/':
+          if (number !== 0) {
+            total /= number;
+          } else {
+            setInput('Error: Division by zero');
+            return;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+    setInput(total.toString());
+    if (isNaN(total)) {
+      setInput('Error: Invalid Character');
     } else {
-      this.setState((prevState) => ({
-        display: prevState.display + value,
-      }));
+      setInput(total.toString());
     }
   };
-
-  clearDisplay = () => {
-    this.setState({
-      display: '0',
-    });
-  };
-
-  calculateResult = () => {
-    try {
-      const result = eval(this.state.display);
-      this.setState({
-        display: result.toString(),
-      });
-    } catch (error) {
-      this.setState({
-        display: 'Error',
-      });
-    }
-  };
-
-  render() {
-    return (
-      <div className="calculator">
-        <div className="display">{this.state.display}</div>
-        <div className="button-cal">
-          <button onClick={() => this.handleButtonPress('7')}>7</button>
-          <button onClick={() => this.handleButtonPress('8')}>8</button>
-          <button onClick={() => this.handleButtonPress('9')}>9</button>
-          <button onClick={() => this.handleButtonPress('+')}>+</button>
-          <button onClick={() => this.handleButtonPress('4')}>4</button>
-          <button onClick={() => this.handleButtonPress('5')}>5</button>
-          <button onClick={() => this.handleButtonPress('6')}>6</button>
-          <button onClick={() => this.handleButtonPress('-')}>-</button>
-          <button onClick={() => this.handleButtonPress('1')}>1</button>
-          <button onClick={() => this.handleButtonPress('2')}>2</button>
-          <button onClick={() => this.handleButtonPress('3')}>3</button>
-          <button onClick={() => this.handleButtonPress('*')}>*</button>
-          <button onClick={() => this.handleButtonPress('0')}>0</button>
-          <button onClick={this.clearDisplay}>C</button>
-          <button onClick={this.calculateResult}>=</button>
-          <button onClick={() => this.handleButtonPress('%')}>%</button>
-        </div>
+  return (
+    <div className="calculator-calc">
+      <input className="input-calc" type="text" value={input} readOnly />
+      <div className="buttons-calc">
+        <button className="button-calc" onClick={() => addToInput('7')}>7</button>
+        <button className="button-calc" onClick={() => addToInput('8')}>8</button>
+        <button className="button-calc" onClick={() => addToInput('9')}>9</button>
+        <button className="button-calc" onClick={() => addToInput('+')}>+</button>
+        <button className="button-calc" onClick={() => addToInput('4')}>4</button>
+        <button className="button-calc" onClick={() => addToInput('5')}>5</button>
+        <button className="button-calc" onClick={() => addToInput('6')}>6</button>
+        <button className="button-calc" onClick={() => addToInput('-')}>-</button>
+        <button className="button-calc" onClick={() => addToInput('1')}>1</button>
+        <button className="button-calc" onClick={() => addToInput('2')}>2</button>
+        <button className="button-calc" onClick={() => addToInput('3')}>3</button>
+        <button className="button-calc" onClick={() => addToInput('*')}>*</button>
+        <button className="button-calc" onClick={() => addToInput('0')}>0</button>
+        <button className="button-calc" onClick={() => addToInput('.')}>.</button>
+        <button className="button-calc" onClick={calculateResult}>=</button>
+        <button className="button-calc" onClick={() => addToInput('/')}>/</button>
+        <button className="button-calc" onClick={clearInput}>C</button>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Calculator;
