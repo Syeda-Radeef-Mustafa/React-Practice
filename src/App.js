@@ -9,6 +9,7 @@ import Testinomial from './pages/Testinomial';
 import Repair from './pages/Repair';
 import Salesproduct from './pages/Salesproduct';
 import Calculator from './component/calculator';
+import Stepform from './component/stepform';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/repair" element={<Repair/>} />
         <Route path="/salesproduct" element={<Salesproduct/>} />
         <Route path="/calculator" element={<Calculator/>} />
+        <Route path="/stepform" element={<Stepform/>} />
         </Routes>
       </Router>
       <Footer />
