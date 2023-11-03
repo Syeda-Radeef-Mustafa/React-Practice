@@ -10,6 +10,7 @@ import Repair from './pages/Repair';
 import Salesproduct from './pages/Salesproduct';
 import Calculator from './component/calculator';
 import Stepform from './component/stepform';
+import Sheets from './component/sheets';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/salesproduct" element={<Salesproduct/>} />
         <Route path="/calculator" element={<Calculator/>} />
         <Route path="/stepform" element={<Stepform/>} />
+        <Route path="/sheets" element={<Sheets/>} />
         </Routes>
       </Router>
       <Footer />

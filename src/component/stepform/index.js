@@ -65,7 +65,7 @@ function Stepform() {
   };
 
   return (
-    <div className="app">
+    <div className="app-stepform">
       <form onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="form-step">
