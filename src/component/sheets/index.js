@@ -1,78 +1,99 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './index.css';
 
-
-function Sheets() {
-  const [sheetData, setSheetData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
+export default function Sheets() {
+  const [data, setData] = useState([]);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   useEffect(() => {
-    // Function to fetch data from Google Sheets
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          'https://sheets.googleapis.com/v4/spreadsheets/1s22rToN00KdylNAOSJNaxvRztXeLnMETZtzr8HPN9Mo/values/Sheet1?key=AIzaSyD3vOiFN6BCzSSM668pURFV2Nnh7llWkVE'
-        );
-        const data = await response.json();
-        const values = data.values || [];
-
-        // Assuming the first row contains headers, and the rest are data
-        if (values.length > 1) {
-          const headers = values[0];
-          const dataRows = values.slice(1);
-
-          const formattedData = dataRows.map((row) => {
-            const columnData = {};
-            headers.forEach((header, index) => {
-              columnData[header] = row[index] || '';
-            });
-            return columnData;
-          });
-
-          setSheetData(formattedData);
-        }
-
-        setLoading(false); // Data has been fetched, set loading to false
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    // Call the fetchData function when the component mounts
-    fetchData();
+    fetchDataFromSheety();
   }, []);
 
+  const fetchDataFromSheety = () => {
+    const apiUrl = 'https://api.sheety.co/1f24acfa034485e5ba8a1fe47e16a2d7/data/sheet1';
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setData(response.data.sheet1);
+      })
+      .catch((error) => {
+        console.error('Error reading data from Sheety', error);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Send the form data to the SheetDB endpoint
+    axios.post('https://sheetdb.io/api/v1/gnyx6t03m0167', formData)
+      .then(response => {
+        fetchDataFromSheety();
+      })
+      .catch(error => {
+        console.error("Error submitting data to SheetDB", error);
+      });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
-    <div className="app-sheets">
-      <div>
-        <h2>Google Sheet Data</h2>
-        {loading ? (
-          <p>Loading data...</p>
-        ) : (
-          <table>
+    <div>
+      <h1>Data from Sheety</h1>
+      {data.length > 0 ? (
+        <div>
+          <table className="sheets-table">
             <thead>
               <tr>
-                {sheetData.length > 0 &&
-                  Object.keys(sheetData[0]).map((header) => (
-                    <th key={header}>{header}</th>
-                  ))}
+                {Object.keys(data[0]).map((header, index) => (
+                  <th key={index}>{header}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {sheetData.map((row, index) => (
-                <tr key={index}>
-                  {Object.keys(row).map((header) => (
-                    <td key={header}>{row[header]}</td>
+              {data.map((row, rowIndex) => (
+                <tr key={rowIndex} >
+                  {Object.values(row).map((cell, cellIndex) => (
+                    <td key={cellIndex}>{cell}</td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
-      </div>
+        </div>
+      ) : (
+        <p>Loading data...</p>
+      )}
+      <h2>Submit Data</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="message">Message:</label>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
-
-export default Sheets;
